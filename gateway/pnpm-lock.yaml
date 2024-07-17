@@ -8,9 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@graphql-mesh/hmac-upstream-signature':
+        specifier: 0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745
+        version: 0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-mesh/utils@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(graphql@16.9.0)(tslib@2.6.3)
+      '@graphql-mesh/plugin-jwt-auth':
+        specifier: 0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745
+        version: 0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-mesh/utils@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@whatwg-node/server@0.9.36)(graphql-yoga@5.6.0(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
       '@graphql-mesh/serve-cli':
         specifier: 0.7.0
         version: 0.7.0(@graphql-mesh/store@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-mesh/utils@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@types/node@20.14.10)(encoding@0.1.13)(graphql-ws@5.16.0(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       graphql:
         specifier: 16.9.0
         version: 16.9.0
@@ -180,12 +189,30 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
+  '@graphql-mesh/hmac-upstream-signature@0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745':
+    resolution: {integrity: sha512-ukGWKj1v823mvxG+JxdxPoifY6ZcLZ0GEReMS9P0rdx8gbkuhHfDQ4MUr59QSZVPrE6NYx4WKebOxozlg5QLMA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@graphql-mesh/types': ^0.99.0
+      '@graphql-mesh/utils': ^0.99.0
+      graphql: '*'
+      tslib: ^2.4.0
+
   '@graphql-mesh/plugin-hive@0.99.0':
     resolution: {integrity: sha512-z07KD8E4bQ2kg0xMxskRW0AglMAfXaISHUeFf8qcuAw7n8/aasNcMoFgSbmtrcg3Irt2JzbJfolN9sdZDYONXA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@graphql-mesh/cross-helpers': ^0.4.4
       '@graphql-mesh/types': ^0.99.0
+      graphql: '*'
+      tslib: ^2.4.0
+
+  '@graphql-mesh/plugin-jwt-auth@0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745':
+    resolution: {integrity: sha512-edh8yolgrV+BpT0qXuzJv+MbyKTpvLaN1CNuMewaLRTmgeGGRfPUutsXnAMPZRaRAYT7Bx/qZFileLZ6WroRyA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@graphql-mesh/types': ^0.99.0
+      '@graphql-mesh/utils': ^0.99.0
       graphql: '*'
       tslib: ^2.4.0
 
@@ -384,6 +411,13 @@ packages:
     resolution: {integrity: sha512-Mg8psdkAp+YTG1OGmvU+xa6xpsAmSir0hhr3yFYPyLNwzUj95DdIwsMpKadDj9xDpYgJcH3Hp/4JMal9DhQimA==}
     engines: {node: '>=18.0.0'}
 
+  '@graphql-yoga/plugin-jwt@3.0.0-alpha-20240717154834-f00aa298':
+    resolution: {integrity: sha512-NYroBYqRZNpTYtucL8HkA1gQT5+JLuIAOTUKZ4QqBMv6GVvuCwUIJSKRcqtxBOGB6aZntw546SIymR+DaKPcKg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      graphql: ^16.5.0
+      graphql-yoga: ^5.6.1-alpha-20240717154834-f00aa298
+
   '@graphql-yoga/subscription@5.0.1':
     resolution: {integrity: sha512-1wCB1DfAnaLzS+IdoOzELGGnx1ODEg9nzQXFh4u2j02vAnne6d+v4A7HIH9EqzVdPLoAaMKXCZUUdKs+j3z1fg==}
     engines: {node: '>=18.0.0'}
@@ -466,6 +500,9 @@ packages:
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
 
+  '@types/jsonwebtoken@9.0.6':
+    resolution: {integrity: sha512-/5hndP5dCjloafCXns6SZyESp3Ldq7YjH3zwzwczYnjxIT0Fqzk5ROSYVGfFyczIue7IUEj8hkvLbPoLQ18vQw==}
+
   '@types/long@4.0.2':
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
 
@@ -493,6 +530,10 @@ packages:
   '@types/ws@8.5.11':
     resolution: {integrity: sha512-4+q7P5h3SpJxaBft0Dzpbr6lmMaqh0Jr2tbhJZ/luAwvD7ohSCniYkwz/pLxuT2h0EOa6QADgJj1Ko+TzRfZ+w==}
 
+  '@whatwg-node/cookie-store@0.2.2':
+    resolution: {integrity: sha512-poI6G6rYGsXNA+JTZLU+IUUXb+Xsau8M3GrcbF3VJdbvW6QGpbuvC+gvN4rD9zJAnqM0jpDKDhIWf2DmEAmWFQ==}
+    engines: {node: '>=16.0.0'}
+
   '@whatwg-node/events@0.1.1':
     resolution: {integrity: sha512-AyQEn5hIPV7Ze+xFoXVU3QTHXVbWPrzaOkxtENMPMuNL6VVHrp4hHfDt9nrQpjO7BgvuM95dMtkycX5M/DZR3w==}
     engines: {node: '>=16.0.0'}
@@ -504,6 +545,12 @@ packages:
   '@whatwg-node/node-fetch@0.5.11':
     resolution: {integrity: sha512-LS8tSomZa3YHnntpWt3PP43iFEEl6YeIsvDakczHBKlay5LdkXFr8w7v8H6akpG5nRrzydyB0k1iE2eoL6aKIQ==}
     engines: {node: '>=16.0.0'}
+
+  '@whatwg-node/server-plugin-cookies@1.0.2':
+    resolution: {integrity: sha512-l5ramNKf3aGCybZcN+bVNrTtUJwuB3PRQSjvvn9oh1CnBEMcrucatELRrSAWL/wZcXcJNF8NHB8G0UPEXkDzkw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@whatwg-node/server': ^0.9.0
 
   '@whatwg-node/server@0.9.36':
     resolution: {integrity: sha512-KT9qKLmbuWSuFv0Vg4JyK2vN2+vSuQPeEa25xpndYFROAIZntYe7e2BlWAk9l7IrgnV+M4bCVhjrAwwRsaCeiA==}
@@ -642,6 +689,9 @@ packages:
 
   brace-expansion@2.0.1:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
+
+  buffer-equal-constant-time@1.0.1:
+    resolution: {integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==}
 
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -832,6 +882,9 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
+  ecdsa-sig-formatter@1.0.11:
+    resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -1228,6 +1281,9 @@ packages:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
 
+  jose@4.15.9:
+    resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -1256,8 +1312,46 @@ packages:
   json-schema@0.4.0:
     resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
 
+  jsonwebtoken@9.0.2:
+    resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
+    engines: {node: '>=12', npm: '>=6'}
+
+  jwa@1.4.1:
+    resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==}
+
+  jwks-rsa@3.1.0:
+    resolution: {integrity: sha512-v7nqlfezb9YfHHzYII3ef2a2j1XnGeSE/bK3WfumaYCqONAIstJbrEGapz4kadScZzEt7zYCN7bucj8C0Mv/Rg==}
+    engines: {node: '>=14'}
+
+  jws@3.2.2:
+    resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
+
+  limiter@1.1.5:
+    resolution: {integrity: sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==}
+
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+
+  lodash.includes@4.3.0:
+    resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
+
+  lodash.isboolean@3.0.3:
+    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
+
+  lodash.isinteger@4.0.4:
+    resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
+
+  lodash.isnumber@3.0.3:
+    resolution: {integrity: sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==}
+
+  lodash.isplainobject@4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+
+  lodash.isstring@4.0.1:
+    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
 
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
@@ -1267,6 +1361,9 @@ packages:
 
   lodash.mergewith@4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
+
+  lodash.once@4.1.1:
+    resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
@@ -1291,9 +1388,16 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
+  lru-cache@6.0.0:
+    resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
+    engines: {node: '>=10'}
+
   lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
+
+  lru-memoizer@2.3.0:
+    resolution: {integrity: sha512-GXn7gyHAMhO13WSKrIiNfztwxodVsP8IoZ3XfrJV4yH2x0/OeTO/FIaAHTY5YekdGgW94njfuKmyyt1E0mR6Ug==}
 
   make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
@@ -2182,6 +2286,14 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
+  '@graphql-mesh/hmac-upstream-signature@0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-mesh/utils@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(graphql@16.9.0)(tslib@2.6.3)':
+    dependencies:
+      '@graphql-mesh/types': 0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
+      '@graphql-mesh/utils': 0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
+      '@whatwg-node/fetch': 0.9.18
+      graphql: 16.9.0
+      tslib: 2.6.3
+
   '@graphql-mesh/plugin-hive@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(encoding@0.1.13)(graphql@16.9.0)(tslib@2.6.3)':
     dependencies:
       '@graphql-hive/client': 0.32.0(encoding@0.1.13)(graphql@16.9.0)
@@ -2193,6 +2305,18 @@ snapshots:
     transitivePeerDependencies:
       - debug
       - encoding
+      - supports-color
+
+  '@graphql-mesh/plugin-jwt-auth@0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-mesh/utils@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@whatwg-node/server@0.9.36)(graphql-yoga@5.6.0(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)':
+    dependencies:
+      '@graphql-mesh/types': 0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
+      '@graphql-mesh/utils': 0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
+      '@graphql-yoga/plugin-jwt': 3.0.0-alpha-20240717154834-f00aa298(@whatwg-node/server@0.9.36)(graphql-yoga@5.6.0(graphql@16.9.0))(graphql@16.9.0)
+      graphql: 16.9.0
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - '@whatwg-node/server'
+      - graphql-yoga
       - supports-color
 
   '@graphql-mesh/runtime@0.100.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0(@graphql-mesh/store@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-mesh/utils@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)':
@@ -2539,6 +2663,18 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
+  '@graphql-yoga/plugin-jwt@3.0.0-alpha-20240717154834-f00aa298(@whatwg-node/server@0.9.36)(graphql-yoga@5.6.0(graphql@16.9.0))(graphql@16.9.0)':
+    dependencies:
+      '@whatwg-node/server-plugin-cookies': 1.0.2(@whatwg-node/server@0.9.36)
+      graphql: 16.9.0
+      graphql-yoga: 5.6.0(graphql@16.9.0)
+      jsonwebtoken: 9.0.2
+      jwks-rsa: 3.1.0
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - '@whatwg-node/server'
+      - supports-color
+
   '@graphql-yoga/subscription@5.0.1':
     dependencies:
       '@graphql-yoga/typed-event-target': 3.0.0
@@ -2640,12 +2776,10 @@ snapshots:
     dependencies:
       '@types/connect': 3.4.38
       '@types/node': 20.14.10
-    optional: true
 
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 20.14.10
-    optional: true
 
   '@types/express-serve-static-core@4.19.5':
     dependencies:
@@ -2653,7 +2787,6 @@ snapshots:
       '@types/qs': 6.9.15
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
-    optional: true
 
   '@types/express@4.17.21':
     dependencies:
@@ -2661,16 +2794,17 @@ snapshots:
       '@types/express-serve-static-core': 4.19.5
       '@types/qs': 6.9.15
       '@types/serve-static': 1.15.7
-    optional: true
 
-  '@types/http-errors@2.0.4':
-    optional: true
+  '@types/http-errors@2.0.4': {}
+
+  '@types/jsonwebtoken@9.0.6':
+    dependencies:
+      '@types/node': 20.14.10
 
   '@types/long@4.0.2':
     optional: true
 
-  '@types/mime@1.3.5':
-    optional: true
+  '@types/mime@1.3.5': {}
 
   '@types/node-fetch@2.6.11':
     dependencies:
@@ -2682,28 +2816,28 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/qs@6.9.15':
-    optional: true
+  '@types/qs@6.9.15': {}
 
-  '@types/range-parser@1.2.7':
-    optional: true
+  '@types/range-parser@1.2.7': {}
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
       '@types/node': 20.14.10
-    optional: true
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
       '@types/node': 20.14.10
       '@types/send': 0.17.4
-    optional: true
 
   '@types/ws@8.5.11':
     dependencies:
       '@types/node': 20.14.10
+
+  '@whatwg-node/cookie-store@0.2.2':
+    dependencies:
+      tslib: 2.6.3
 
   '@whatwg-node/events@0.1.1': {}
 
@@ -2718,6 +2852,12 @@ snapshots:
       '@whatwg-node/events': 0.1.1
       busboy: 1.6.0
       fast-querystring: 1.1.2
+      tslib: 2.6.3
+
+  '@whatwg-node/server-plugin-cookies@1.0.2(@whatwg-node/server@0.9.36)':
+    dependencies:
+      '@whatwg-node/cookie-store': 0.2.2
+      '@whatwg-node/server': 0.9.36
       tslib: 2.6.3
 
   '@whatwg-node/server@0.9.36':
@@ -2903,6 +3043,8 @@ snapshots:
       balanced-match: 1.0.2
     optional: true
 
+  buffer-equal-constant-time@1.0.1: {}
+
   busboy@1.6.0:
     dependencies:
       streamsearch: 1.1.0
@@ -3072,7 +3214,6 @@ snapshots:
   debug@4.3.5:
     dependencies:
       ms: 2.1.2
-    optional: true
 
   deepmerge@4.3.1: {}
 
@@ -3129,6 +3270,10 @@ snapshots:
 
   eastasianwidth@0.2.0:
     optional: true
+
+  ecdsa-sig-formatter@1.0.11:
+    dependencies:
+      safe-buffer: 5.2.1
 
   ee-first@1.1.1:
     optional: true
@@ -3683,6 +3828,8 @@ snapshots:
 
   jiti@1.21.6: {}
 
+  jose@4.15.9: {}
+
   js-tokens@4.0.0:
     optional: true
 
@@ -3709,13 +3856,66 @@ snapshots:
 
   json-schema@0.4.0: {}
 
+  jsonwebtoken@9.0.2:
+    dependencies:
+      jws: 3.2.2
+      lodash.includes: 4.3.0
+      lodash.isboolean: 3.0.3
+      lodash.isinteger: 4.0.4
+      lodash.isnumber: 3.0.3
+      lodash.isplainobject: 4.0.6
+      lodash.isstring: 4.0.1
+      lodash.once: 4.1.1
+      ms: 2.1.3
+      semver: 7.6.2
+
+  jwa@1.4.1:
+    dependencies:
+      buffer-equal-constant-time: 1.0.1
+      ecdsa-sig-formatter: 1.0.11
+      safe-buffer: 5.2.1
+
+  jwks-rsa@3.1.0:
+    dependencies:
+      '@types/express': 4.17.21
+      '@types/jsonwebtoken': 9.0.6
+      debug: 4.3.5
+      jose: 4.15.9
+      limiter: 1.1.5
+      lru-memoizer: 2.3.0
+    transitivePeerDependencies:
+      - supports-color
+
+  jws@3.2.2:
+    dependencies:
+      jwa: 1.4.1
+      safe-buffer: 5.2.1
+
+  limiter@1.1.5: {}
+
+  lodash.clonedeep@4.5.0: {}
+
   lodash.get@4.4.2: {}
+
+  lodash.includes@4.3.0: {}
+
+  lodash.isboolean@3.0.3: {}
+
+  lodash.isinteger@4.0.4: {}
+
+  lodash.isnumber@3.0.3: {}
+
+  lodash.isplainobject@4.0.6: {}
+
+  lodash.isstring@4.0.1: {}
 
   lodash.memoize@4.1.2: {}
 
   lodash.merge@4.6.2: {}
 
   lodash.mergewith@4.6.2: {}
+
+  lodash.once@4.1.1: {}
 
   lodash.sortby@4.7.0: {}
 
@@ -3738,8 +3938,17 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
+  lru-cache@6.0.0:
+    dependencies:
+      yallist: 4.0.0
+
   lru-cache@7.18.3:
     optional: true
+
+  lru-memoizer@2.3.0:
+    dependencies:
+      lodash.clonedeep: 4.5.0
+      lru-cache: 6.0.0
 
   make-dir@3.1.0:
     dependencies:
@@ -3850,11 +4059,9 @@ snapshots:
   ms@2.0.0:
     optional: true
 
-  ms@2.1.2:
-    optional: true
+  ms@2.1.2: {}
 
-  ms@2.1.3:
-    optional: true
+  ms@2.1.3: {}
 
   nan@2.18.0:
     optional: true
@@ -4115,8 +4322,7 @@ snapshots:
       has-symbols: 1.0.3
       isarray: 2.0.5
 
-  safe-buffer@5.2.1:
-    optional: true
+  safe-buffer@5.2.1: {}
 
   safe-regex-test@1.0.3:
     dependencies:
@@ -4130,8 +4336,7 @@ snapshots:
   semver@6.3.1:
     optional: true
 
-  semver@7.6.2:
-    optional: true
+  semver@7.6.2: {}
 
   send@0.18.0:
     dependencies:
@@ -4512,8 +4717,7 @@ snapshots:
 
   ws@8.18.0: {}
 
-  yallist@4.0.0:
-    optional: true
+  yallist@4.0.0: {}
 
   zen-observable-ts@1.2.5:
     dependencies:
