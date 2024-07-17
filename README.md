@@ -45,6 +45,36 @@ pnpm compose
 
 This command uses the `@theguild/federation-composition` library, which is our schema composition tool, to merge the schemas from the subgraphs into a single supergraph schema. The resulting `supergraph.graphql` file will be generated in the `gateway/` directory. This process mirrors what Hive does on the cloud: it takes the published subgraphs, composes them into a supergraph, and exposes it via the CDN for usage. By doing it locally, we illustrate the core setup before moving on to the integration with Hive. Hive manages the schema composition, versioning, and ensures consistency across your APIs, providing a seamless experience in a cloud environment.
 
+Now, that we have a supergraph file, head to the `/gateway` directory, and run:
+
+```sh
+pnpm start
+```
+
+You should see this in your terminal:
+
+```sh
+🕸️  Mesh 💡 Searching for default config files
+🕸️  Mesh 💡 Loaded config file
+🕸️  Mesh 💡 Loading Supergraph from ./supergraph.graphql
+🕸️  Mesh ⚠️ If you want to enable hot reloading when ./supergraph.graphql changes, install "@parcel/watcher"
+🕸️  Mesh 💡 Starting server on http://0.0.0.0:4000
+```
+
+Now, head to `http://0.0.0.0:4000`, and you'll see your gateway running, but if you try to execute any query it'd error, because we need to run our subgraphs first, which the gateway uses to resolve the queries.
+
+Go to `/subgraphs`, and run:
+
+```
+pnpm start:subgraphs
+```
+
+This will run both the `users` and `comments` subgraphs concurrently on ports `4001` and `4002` respectively.
+
+Now, if we go to `http://0.0.0.0:4000` again to execute the request we tried, it will succeed! 🎉
+
+![](./images/mesh.png)
+
 ### 5. Hive Integration
 
 #### 1. Hive CLI Access Token
