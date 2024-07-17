@@ -1,6 +1,23 @@
 # GraphQL Mesh <> Hive Demo
 
-In this demo, you'll learn how to integrate [GraphQL Mesh](https://the-guild.dev/graphql/mesh) with [Hive](https://the-guild.dev/graphql/hive). We'll show you how to set up a local supergraph, connect it to Hive for supergraph polling, usage reporting, and schema management. You'll also see how to use key plugins in GraphQL Mesh, like response caching, rate limiting and authentication. By following this guide, you'll be able to set up and run your own GraphQL Mesh instance with Hive, making your GraphQL API management easier.
+In this demo, you'll learn how to integrate [GraphQL Mesh](https://the-guild.dev/graphql/mesh) with [Hive](https://the-guild.dev/graphql/hive). We'll show you how to set up a local supergraph, publish subgraphs, connect to Hive for supergraph polling, usage reporting, and schema management. You'll also see how to use key plugins in GraphQL Mesh, like response caching, rate limiting and authentication. By following this guide, you'll be able to set up and run your own GraphQL Mesh instance with Hive, making your GraphQL API management easier.
+
+## Table of Contents
+
+1. [The Complete Federation Solution](#the-complete-federation-solution)
+2. [Create a Hive Account and Project](#1-create-a-hive-account-and-project)
+3. [Clone the Demo Repo](#2-clone-the-repository)
+4. [Explore the Subgraphs](#3-explore-the-subgraphs)
+5. [Generate the Supergraph](#4-generate-the-supergraph)
+6. [Run GraphQL Mesh (the gateway)](#5-run-graphql-mesh-the-gateway)
+7. [Hive Integration](#6-hive-integration)
+   - [Hive CLI Access Token](#1-hive-cli-access-token)
+   - [Publish your schemas](#2-publish-your-schemas)
+   - [Check Your Schema](#3-check-your-schema)
+   - [Fetch the Supergraph from Hive](#4-fetch-the-supergraph-from-hive)
+   - [Set Up GraphQL Mesh with Hive](#5-set-up-graphql-mesh-with-hive)
+   - [Usage reporting](#6-usage-reporting)
+
 
 ## The Complete Federation Solution
 
