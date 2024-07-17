@@ -11,9 +11,6 @@ importers:
       '@graphql-mesh/serve-cli':
         specifier: 0.7.0
         version: 0.7.0(@graphql-mesh/store@0.99.0(@graphql-mesh/cross-helpers@0.4.4(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0))(@graphql-mesh/types@0.99.0)(@graphql-mesh/utils@0.99.0)(@graphql-tools/utils@10.3.2(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3))(@types/node@20.14.10)(encoding@0.1.13)(graphql-ws@5.16.0(graphql@16.9.0))(graphql@16.9.0)(tslib@2.6.3)
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
       graphql:
         specifier: 16.9.0
         version: 16.9.0
