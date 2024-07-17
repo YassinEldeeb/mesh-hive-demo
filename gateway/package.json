@@ -1,0 +1,12 @@
+{
+  "name": "@examples/hive-example-gateway",
+  "private": true,
+  "scripts": {
+    "start": "mesh-serve"
+  },
+  "dependencies": {
+    "@graphql-mesh/serve-cli": "0.7.0",
+    "dotenv": "^16.4.5",
+    "graphql": "16.9.0"
+  }
+}

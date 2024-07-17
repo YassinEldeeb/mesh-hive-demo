@@ -1,0 +1,26 @@
+{
+  "name": "subgraphs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compose": "tsx compose.ts",
+    "start:subgraphs": "concurrently \"pnpm start:users\" \"pnpm start:comments\"",
+    "start:users": "cd users && pnpm start",
+    "start:comments": "cd comments && pnpm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@theguild/federation-composition": "^0.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "concurrently": "^8.2.2",
+    "graphql": "^16.9.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}
