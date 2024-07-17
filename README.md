@@ -19,7 +19,7 @@ First, sign up for a Hive account if you haven't already. Follow the instruction
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/yassineldeeb/graphql-mesh-hive-demo
+git clone https://github.com/yassineldeeb/mesh-hive-demo
 ```
 
 ### 3. Explore the Subgraphs
