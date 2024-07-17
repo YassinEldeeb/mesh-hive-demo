@@ -248,7 +248,10 @@ HIVE_CDN_KEY=YOUR_VALUE
 or
 
 ```sh
-HIVE_REGISTRY_TOKEN=YOUR_VALUE HIVE_CDN_ENDPOINT=YOUR_VALUE HIVE_CDN_KEY=YOUR_VALUE pnpm mesh-serve
+HIVE_REGISTRY_TOKEN=YOUR_VALUE \
+HIVE_CDN_ENDPOINT=YOUR_VALUE \
+HIVE_CDN_KEY=YOUR_VALUE \
+pnpm mesh-serve
 ```
 
 Then, restart the gateway, and navigate to `http://localhost:4000/graphql`, you'll see the supergraph served from the published subgraphs through Hive, and GraphQL Mesh will handle polling based on your configuration so when there are new Supergraph versions composed in Hive, Mesh will pick it up automatically! 🎉
