@@ -16,12 +16,12 @@ createServer(
       typeDefs: parse(readFileSync(join(__dirname, 'typeDefs.graphql'), 'utf-8')),
       resolvers: {
         Query: {
-          comments: () => comments
+          comments: () => comments,
         },
-        Comment: {
-          __resolveReference: (comment) => {
-            return comments.find((e) => e.id === comment.id)
-          },
+        User: {
+          comments(user) {
+            return comments.filter(comment => comment.author.id === user.id)
+          }
         },
       },
     }),

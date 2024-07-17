@@ -1,18 +1,15 @@
 extend schema
-  @link(
-    url: "https://specs.apollo.dev/federation/v2.3"
-    import: ["@key", "@external"]
-  )
+  @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
 
-type Comment {
+type Comment @key(fields: "id") {
   id: ID!
   text: String!
   author: User!
 }
 
-extend type User @key(fields: "id") {
-  id: ID! @external
-  comments: [Comment]
+type User @key(fields: "id") {
+  id: ID!
+  comments: [Comment!]!
 }
 
 type Query {

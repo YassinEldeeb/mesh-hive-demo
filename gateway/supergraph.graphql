@@ -79,15 +79,15 @@ enum join__Graph {
   USERS @join__graph(name: "users", url: "http://localhost:4001/graphql") 
 }
 
-type Comment @join__type(graph: COMMENTS)  {
+type Comment @join__type(graph: COMMENTS, key: "id")  {
   id: ID!
   text: String!
   author: User!
 }
 
-type User @join__type(graph: COMMENTS, key: "id", extension: true)  @join__type(graph: USERS, key: "id")  {
+type User @join__type(graph: COMMENTS, key: "id")  @join__type(graph: USERS, key: "id")  {
   id: ID!
-  comments: [Comment] @join__field(graph: COMMENTS) 
+  comments: [Comment!]! @join__field(graph: COMMENTS) 
   name: String! @join__field(graph: USERS) 
 }
 

@@ -17,10 +17,11 @@ createServer(
       resolvers: {
         Query: {
           users: () => users,
+          user: (_, { id }) => users.find(user => user.id === id),
         },
         User: {
-          __resolveReference: (user) => {
-            return users.find((e) => e.id === user.id)
+          __resolveReference: (reference) => {
+            return users.find(user => user.id === reference.id)
           },
         },
       },
