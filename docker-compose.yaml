@@ -56,11 +56,29 @@ services:
   prometheus:
     image: prom/prometheus:v2.53.1
     volumes:
-      - "./docker-configs/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./docker-configs/prom/prometheus.yml:/etc/prometheus/prometheus.yml"
     ports:
       - "9090:9090"
     networks:
       - graphql
+    command:
+      - "--web.enable-remote-write-receiver"
+      - "--enable-feature=native-histograms"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--log.level=debug"
+
+  grafana:
+    image: grafana/grafana:10.3.3
+    networks:
+      - graphql
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - ./docker-configs/grafana:/etc/grafana/provisioning/
 
 networks:
   graphql: {}
