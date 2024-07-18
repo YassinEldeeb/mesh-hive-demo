@@ -1,7 +1,7 @@
 name: "mesh-hive-demo"
 services:
   gateway:
-    image: ghcr.io/ardatan/mesh-serve:47cef33
+    image: ghcr.io/ardatan/mesh-serve:0e175b4
     ports:
       - "4000:4000"
     env_file:
@@ -66,6 +66,16 @@ services:
       - "--enable-feature=native-histograms"
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--log.level=debug"
+
+  # Jaeger (Telmetry)
+  jaeger:
+    image: jaegertracing/all-in-one:1.59.0
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+    ports:
+      - 4317:4317 # OTLP over gRPC
+      - 4318:4318 # OTLP over HTTP
+      - 16686:16686 # Jaeger UI / API
 
   grafana:
     image: grafana/grafana:10.3.3

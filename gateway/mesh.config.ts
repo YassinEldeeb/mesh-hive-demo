@@ -4,6 +4,7 @@ import useJWT, {
 } from "@graphql-mesh/plugin-jwt-auth";
 import { useHMACUpstreamSignature } from "@graphql-mesh/hmac-upstream-signature";
 import usePrometheusMetrics from "@graphql-mesh/plugin-prometheus";
+import { useOpenTelemetry } from "@envelop/opentelemetry";
 
 const { JWT_SIGNING_SECRET, HMAC_SIGNING_SECRET } = process.env;
 
@@ -16,7 +17,12 @@ if (!HMAC_SIGNING_SECRET) {
 
 export const serveConfig = defineConfig({
   logging: true,
-  plugins: () => [
+  plugins: (pluginCtx) => [
+    useOpenTelemetry({
+      ...pluginCtx,
+      variables: false,
+      resolvers: false,
+    }) as any,
     usePrometheusMetrics({
       http: true,
       fetchMetrics: true,
