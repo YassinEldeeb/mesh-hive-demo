@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { createServer } from "http";
 import { join } from "path";
-import { parse } from "graphql";
+import { parse, print } from "graphql";
 import { createYoga, Plugin, YogaLogger } from "graphql-yoga";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { HMACUpstreamSignatureValidationOptions } from "@graphql-mesh/hmac-upstream-signature";
@@ -47,10 +47,16 @@ export function useHMACSignatureValidation(
 
 createServer(
   createYoga({
+    logging: true,
     plugins: [
       useHMACSignatureValidation({
         secret: HMAC_SIGNING_SECRET,
       }),
+      {
+        onExecute: ({ args }: any) => {
+          console.log("onExecute", print(args.document));
+        },
+      },
     ],
     schema: buildSubgraphSchema({
       typeDefs: parse(
