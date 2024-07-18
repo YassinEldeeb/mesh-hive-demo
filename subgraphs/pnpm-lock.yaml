@@ -58,6 +58,9 @@ importers:
       '@apollo/subgraph':
         specifier: ^2.8.3
         version: 2.8.3(graphql@16.9.0)
+      '@envelop/operation-field-permissions':
+        specifier: 6.0.0
+        version: 6.0.0(@envelop/core@5.0.1)(graphql@16.9.0)
       '@graphql-hive/cli':
         specifier: 0.38.5
         version: 0.38.5(@types/node@20.14.10)
@@ -209,6 +212,20 @@ packages:
   '@envelop/core@5.0.1':
     resolution: {integrity: sha512-wxA8EyE1fPnlbP0nC/SFI7uU8wSNf4YjxZhAPu0P63QbgIvqHtHsH4L3/u+rsTruzhk3OvNRgQyLsMfaR9uzAQ==}
     engines: {node: '>=18.0.0'}
+
+  '@envelop/extended-validation@4.0.0':
+    resolution: {integrity: sha512-pvJ/OL+C+lpNiiCXezHT+vP3PTq37MQicoOB1l5MdgOOZZWRAp0NDOgvEKcXUY7AWNpvNHgSE0QFSRfGwsfwFQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@envelop/core': ^5.0.0
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+
+  '@envelop/operation-field-permissions@6.0.0':
+    resolution: {integrity: sha512-aeYo3SxcCilTnp+PCSsQdwNM6y3jS/J6I16knEPvvtF9qrWaA/4jL4j7qq/N9XOZEEPMxS+K+49txdIfG5BpvQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@envelop/core': ^5.0.0
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
 
   '@envelop/types@5.0.0':
     resolution: {integrity: sha512-IPjmgSc4KpQRlO4qbEDnBEixvtb06WDmjKfi/7fkZaryh5HuOmTtixe1EupQI5XfXO8joc3d27uUZ0QdC++euA==}
@@ -2040,6 +2057,20 @@ snapshots:
   '@envelop/core@5.0.1':
     dependencies:
       '@envelop/types': 5.0.0
+      tslib: 2.6.3
+
+  '@envelop/extended-validation@4.0.0(@envelop/core@5.0.1)(graphql@16.9.0)':
+    dependencies:
+      '@envelop/core': 5.0.1
+      '@graphql-tools/utils': 10.3.2(graphql@16.9.0)
+      graphql: 16.9.0
+      tslib: 2.6.3
+
+  '@envelop/operation-field-permissions@6.0.0(@envelop/core@5.0.1)(graphql@16.9.0)':
+    dependencies:
+      '@envelop/core': 5.0.1
+      '@envelop/extended-validation': 4.0.0(@envelop/core@5.0.1)(graphql@16.9.0)
+      graphql: 16.9.0
       tslib: 2.6.3
 
   '@envelop/types@5.0.0':
