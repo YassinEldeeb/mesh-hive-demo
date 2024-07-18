@@ -11,12 +11,18 @@ const comments = [
   { id: "2", text: "Thanks for the info!", author: { id: "2" } },
 ];
 
+const { HMAC_SIGNING_SECRET } = process.env;
+
+if (!HMAC_SIGNING_SECRET) {
+  throw new Error("HMAC_SIGNING_SECRET environment variable is required");
+}
+
 createServer(
   createYoga({
     plugins: [
-      useHMACSignatureValidation({
-        secret: process.env.HMAC_SIGNING_SECRET!,
-      }),
+      // useHMACSignatureValidation({
+      // secret: HMAC_SIGNING_SECRET,
+      // }),
     ],
     schema: buildSubgraphSchema({
       typeDefs: parse(

@@ -24,7 +24,7 @@ services:
       context: ./subgraphs/comments/
       dockerfile: ../Dockerfile
     ports:
-      - "4001:4001"
+      - "4002:4002"
     environment:
       HMAC_SIGNING_SECRET: topsecret
     healthcheck:
@@ -43,7 +43,7 @@ services:
     environment:
       HMAC_SIGNING_SECRET: topsecret
     ports:
-      - "4002:4002"
+      - "4001:4001"
     healthcheck:
       test: curl --fail http://localhost:4002 || exit 1
       interval: 60s

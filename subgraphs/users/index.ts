@@ -11,11 +11,17 @@ const users = [
   { id: "2", name: "Bob" },
 ];
 
+const { HMAC_SIGNING_SECRET } = process.env;
+
+if (!HMAC_SIGNING_SECRET) {
+  throw new Error("HMAC_SIGNING_SECRET environment variable is required");
+}
+
 createServer(
   createYoga({
     plugins: [
       useHMACSignatureValidation({
-        secret: process.env.HMAC_SIGNING_SECRET!,
+        secret: HMAC_SIGNING_SECRET,
       }),
     ],
     schema: buildSubgraphSchema({
