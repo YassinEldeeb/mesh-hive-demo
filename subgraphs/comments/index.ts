@@ -2,9 +2,9 @@ import { readFileSync } from "fs";
 import { createServer } from "http";
 import { join } from "path";
 import { parse } from "graphql";
-import { createYoga } from "graphql-yoga";
+import { createYoga, Plugin, YogaLogger } from "graphql-yoga";
 import { buildSubgraphSchema } from "@apollo/subgraph";
-import { useHMACSignatureValidation } from "@graphql-mesh/hmac-upstream-signature";
+import { HMACUpstreamSignatureValidationOptions } from "@graphql-mesh/hmac-upstream-signature";
 
 const comments = [
   { id: "1", text: "Great post!", author: { id: "1" } },
@@ -17,12 +17,40 @@ if (!HMAC_SIGNING_SECRET) {
   throw new Error("HMAC_SIGNING_SECRET environment variable is required");
 }
 
+function createCryptoKey(
+  secret: string,
+  usages: KeyUsage[]
+): Promise<CryptoKey> {
+  return crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    usages
+  );
+}
+const DEFAULT_HEADER_NAME = "x-hmac-signature";
+
+export function useHMACSignatureValidation(
+  options: HMACUpstreamSignatureValidationOptions
+): Plugin {
+  const headerName = options.headerName || DEFAULT_HEADER_NAME;
+  const key$ = createCryptoKey(options.secret, ["verify"]);
+  let logger: YogaLogger;
+
+  return {
+    onYogaInit({ yoga }) {
+      logger = yoga.logger;
+    },
+  };
+}
+
 createServer(
   createYoga({
     plugins: [
-      // useHMACSignatureValidation({
-      // secret: HMAC_SIGNING_SECRET,
-      // }),
+      useHMACSignatureValidation({
+        secret: HMAC_SIGNING_SECRET,
+      }),
     ],
     schema: buildSubgraphSchema({
       typeDefs: parse(

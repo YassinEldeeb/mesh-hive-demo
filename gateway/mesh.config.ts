@@ -3,6 +3,7 @@ import useJWT, {
   createInlineSigningKeyProvider,
 } from "@graphql-mesh/plugin-jwt-auth";
 import { useHMACUpstreamSignature } from "@graphql-mesh/hmac-upstream-signature";
+import usePrometheusMetrics from "@graphql-mesh/plugin-prometheus";
 
 const { JWT_SIGNING_SECRET, HMAC_SIGNING_SECRET } = process.env;
 
@@ -16,6 +17,11 @@ if (!HMAC_SIGNING_SECRET) {
 export const serveConfig = defineConfig({
   logging: true,
   plugins: () => [
+    usePrometheusMetrics({
+      http: true,
+      fetchMetrics: true,
+      skipIntrospection: true,
+    }),
     useJWT({
       forward: {
         claims: true,

@@ -6,8 +6,9 @@
   },
   "dependencies": {
     "@graphql-mesh/serve-cli": "0.7.0",
-    "@graphql-mesh/plugin-jwt-auth": "0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745",
-    "@graphql-mesh/hmac-upstream-signature": "0.0.2-alpha-20240717160323-f922d80563ed25acf53415d5cd51592cb696e745",
+    "@graphql-mesh/plugin-prometheus": "0.102.0",
+    "@graphql-mesh/plugin-jwt-auth": "0.0.2-alpha-20240718081457-6b1ab3a7b2b81ffd7d7adf8ed069d08a74b870a9",
+    "@graphql-mesh/hmac-upstream-signature": "0.0.2-alpha-20240718081457-6b1ab3a7b2b81ffd7d7adf8ed069d08a74b870a9",
     "dotenv": "^16.4.5",
     "graphql": "16.9.0"
   }
