@@ -5,8 +5,13 @@ Just run `./start.sh`.
 Mesh: http://localhost:4000
 Grafana (prom metrics): http://localhost:3000
 
-User 1 token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzIxMjk5ODEzLCJleHAiOjE3NTI4NTc0MTN9.poFfksFSqU9MrfqUOASSdB4RNJT7BFxU8dQX4UwBnXU`
-User 2 token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzIxMjk5ODM4LCJleHAiOjE3NTI4NTc0Mzh9.LCQLt5HNLZL7KAEb0bSKs5mHl_gANydGBKhd0VN_Fm0`
+User 1 token:
+
+`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzIxMjk5ODEzLCJleHAiOjE3NTI4NTc0MTN9.poFfksFSqU9MrfqUOASSdB4RNJT7BFxU8dQX4UwBnXU`
+
+User 2 token:
+
+`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzIxMjk5ODM4LCJleHAiOjE3NTI4NTc0Mzh9.LCQLt5HNLZL7KAEb0bSKs5mHl_gANydGBKhd0VN_Fm0`
 
 ### Demo notes
 
