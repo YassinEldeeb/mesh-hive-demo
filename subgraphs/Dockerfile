@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y curl
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package.json .
 RUN npm install
 
 COPY . .
