@@ -27,13 +27,11 @@ const verifyHmacPlugin = {
     }
 
     const serializedParams = defaultParamsSerializer({
-      extensions: request.extensions,
       query: request.query,
       variables: request.variables,
-      operationName: request.operationName,
     });
 
-    const incomingReqSignature = createHmac("sha-256", HMAC_SIGNING_SECRET)
+    const incomingReqSignature = createHmac("sha256", HMAC_SIGNING_SECRET)
       .update(serializedParams)
       .digest("base64");
 
