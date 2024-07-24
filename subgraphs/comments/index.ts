@@ -4,6 +4,8 @@ import { parse } from "graphql";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { ApolloServer, ApolloServerPlugin } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { defaultParamsSerializer } from "@graphql-mesh/hmac-upstream-signature";
+import { createHmac } from "crypto";
 
 const comments = [
   { id: "1", text: "Great post!", author: { id: "1" } },
@@ -16,27 +18,39 @@ if (!HMAC_SIGNING_SECRET) {
   throw new Error("HMAC_SIGNING_SECRET environment variable is required");
 }
 
+const verifyHmacPlugin = {
+  async requestDidStart({ request, contextValue }) {
+    const signature = request.extensions?.["hmac-signature"];
+
+    if (!signature) {
+      throw new Error("HMAC signature is missing");
+    }
+
+    const serializedParams = defaultParamsSerializer({
+      extensions: request.extensions,
+      query: request.query,
+      variables: request.variables,
+      operationName: request.operationName,
+    });
+
+    const incomingReqSignature = createHmac("sha-256", HMAC_SIGNING_SECRET)
+      .update(serializedParams)
+      .digest("base64");
+
+    if (incomingReqSignature !== signature) {
+      throw new Error("HMAC signature is invalid");
+    }
+  },
+} satisfies ApolloServerPlugin<{}>;
+
 const extractJwtPlugin = {
   async requestDidStart({ request, contextValue }) {
     contextValue.jwt = request.extensions?.jwt;
   },
 } satisfies ApolloServerPlugin<{ jwt?: { payload: Record<string, any> } }>;
 
-const verifyHmacSignaturePlugin = {
-  async requestDidStart({ request }) {
-    const { headers } = request.http!;
-    const signature = headers.get("x-hmac-signature");
-
-    if (!signature) {
-      throw new Error("Missing HMAC signature");
-    }
-
-    // TODO: Fix this
-  },
-} satisfies ApolloServerPlugin;
-
 const server = new ApolloServer({
-  plugins: [verifyHmacSignaturePlugin, extractJwtPlugin],
+  plugins: [verifyHmacPlugin, extractJwtPlugin],
   schema: buildSubgraphSchema({
     typeDefs: parse(readFileSync(join(__dirname, "typeDefs.graphql"), "utf-8")),
     resolvers: {
