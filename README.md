@@ -214,6 +214,8 @@ This time, Hive will detect a breaking change and report it:
    - Field `newComments` was added to object type `User`
 ```
 
+Hive is not yet aware of the traffic (what requests were made, no usage reporting yet, we'll get to it later in a moment), and it will treat every field removal as breaking. However, users can have smart detection of breaking changes when they report usage to Hive.
+
 And the history of all the check scripts we have manually ran locally, can be found in the `Checks` tab in the dashboard, with a comprehensive view to all the details.
 
 #### 4. Fetch the Supergraph from Hive
