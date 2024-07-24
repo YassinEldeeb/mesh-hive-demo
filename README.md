@@ -6,11 +6,9 @@ In this demo, you'll learn how to integrate [GraphQL Mesh](https://the-guild.dev
 
 1. [The Complete Federation Solution](#the-complete-federation-solution)
 2. [Create a Hive Account and Project](#1-create-a-hive-account-and-project)
-3. [Clone the Demo Repo](#2-clone-the-repository)
-4. [Explore the Subgraphs](#3-explore-the-subgraphs)
-5. [Generate the Supergraph](#4-generate-the-supergraph)
-6. [Run GraphQL Mesh (the gateway)](#5-run-graphql-mesh-the-gateway)
-7. [Hive Integration](#6-hive-integration)
+3. [Explore the Subgraphs](#3-explore-the-subgraphs)
+4. [Run GraphQL Mesh (the gateway)](#5-run-graphql-mesh-the-gateway)
+5. [Hive Integration](#6-hive-integration)
    - [Hive CLI Access Token](#1-hive-cli-access-token)
    - [Publish your schemas](#2-publish-your-schemas)
    - [Check Your Schema](#3-check-your-schema)
@@ -27,48 +25,35 @@ GraphQL Mesh and Hive together offer a complete federation solution that allows 
 
 - **Hive**: A schema registry and management tool that allows you to version, monitor, and manage your GraphQL schemas. Hive handles the schema composition and versioning on the cloud, ensuring that your APIs are always up-to-date and consistent. It also provides features like usage reporting and analytics, which help you understand how your APIs are being used and optimize their performance.
 
-For users transitioning from other federation solutions, this combination provides a truly open-source robust alternative with additional features and flexibility.
+For users transitioning from Apollo Federation, this combination provides a truly open-source robust alternative with additional features and flexibility.
 
 ### 1. Create a Hive Account and Project
-First, sign up for a Hive account if you haven't already. Follow the instructions [here](https://docs.graphql-hive.com/first-steps) to create your account, install Hive CLI, and create a new Hive project. For this demo, choose the "Apollo Federation" project type.
+First, sign up for a Hive account if you haven't already. Follow the instructions [here](https://the-guild.dev/graphql/hive/docs/get-started/first-steps) to create your account, install Hive CLI, and create a new Hive project. For this demo, choose the "Apollo Federation" project type.
 
-
-### 2. Clone the Repository
-
-```bash
-git clone https://github.com/yassineldeeb/mesh-hive-demo
-```
-
-### 3. Explore the Subgraphs
+### 2. Explore the Subgraphs
 
 A subgraph is a GraphQL service that defines a specific part of your overall GraphQL schema. Each subgraph can be developed, deployed, and maintained independently. In a federated setup, multiple subgraphs are combined to form a unified API.
 
 Take a moment to look at the subgraph definitions in the `subgraphs/` directory. There are two subgraphs: `users` and `comments`. Each subgraph has its own schema and resolvers:
-- `subgraphs/users/index.ts`
-- `subgraphs/users/typeDefs.graphql`
-- `subgraphs/comments/index.ts`
-- `subgraphs/comments/typeDefs.graphql`
+- [`subgraphs/users/index.ts`](https://github.com/YassinEldeeb/mesh-hive-demo/blob/main/subgraphs/users/index.ts)
+- [`subgraphs/users/typeDefs.graphql`](https://github.com/YassinEldeeb/mesh-hive-demo/blob/main/subgraphs/users/typeDefs.graphql)
+- [`subgraphs/comments/index.ts`](https://github.com/YassinEldeeb/mesh-hive-demo/blob/main/subgraphs/comments/index.ts)
+- [`subgraphs/comments/typeDefs.graphql`](https://github.com/YassinEldeeb/mesh-hive-demo/blob/main/subgraphs/comments/typeDefs.graphql)
 
-### 4. Generate the Supergraph
+### 3. Run GraphQL Mesh (the gateway)
 
-A supergraph is the combined schema generated from multiple subgraphs. It represents the unified API that clients can query. GraphQL Mesh needs a supergraph to understand how different subgraphs are linked together and to resolve queries across them.
+Now, head to the `/gateway` directory, you'll see a previously composed `supergraph.graphql` file which we'll use to run the gateway.
 
-Now that you have explored the subgraphs, let's compose them into a supergraph!
+GraphQL Mesh, as a gateway, accepts requests and resolves them by talking to subgraphs, so we need to run the subgraphs first:
 
+Go to `/subgraphs`, and run the following to start the subgraphs:
 ```sh
-cd subgraphs
-pnpm compose
+npm run start:subgraphs
 ```
 
-This command uses the `@theguild/federation-composition` library, which is our schema composition tool, to merge the schemas from the subgraphs into a single supergraph schema. The resulting `supergraph.graphql` file will be generated in the `gateway/` directory. This process mirrors what Hive does on the cloud: it takes the published subgraphs, composes them into a supergraph, and exposes it via the CDN for usage. By doing it locally, we illustrate the core setup before moving on to the integration with Hive. Hive manages the schema composition, versioning, and ensures consistency across your APIs, providing a seamless experience in a cloud environment.
-
-
-### 5. Run GraphQL Mesh (the gateway)
-
-Now, that we have a supergraph file, head to the `/gateway` directory, and run the gateway:
-
+Then switch over to `/gateway`, and run: 
 ```sh
-pnpm start
+npm run start
 ```
 
 You should see this in your terminal:
@@ -81,21 +66,11 @@ You should see this in your terminal:
 🕸️  Mesh 💡 Starting server on http://0.0.0.0:4000
 ```
 
-Now, head to `http://0.0.0.0:4000`, and you'll see your gateway running, but if you try to execute any query it'd error, because we need to run our subgraphs first, which the gateway uses to resolve the queries.
-
-Go to `/subgraphs`, and run:
-
-```
-pnpm start:subgraphs
-```
-
-This will run both the `users` and `comments` subgraphs concurrently on ports `4001` and `4002` respectively.
-
-Now, if we go to `http://0.0.0.0:4000` again to execute the request we tried, it will succeed! 🎉
+Now, if you go to `http://0.0.0.0:4000`, you'll see your gateway running, try to execute any query, and it will succeed! 🎉
 
 ![](./images/mesh.png)
 
-### 6. Hive Integration
+### 4. Hive Integration
 
 #### 1. Hive CLI Access Token
 Now, let's head to our Hive dashboard into our created project, you'll see various targets, click on the "development" target for now as we're exploring, then choose the **Settings** tab. On the Settings screen, you can manage your target’s settings and access tokens.
@@ -285,7 +260,7 @@ export const serveConfig = defineConfig({
 })
 ```
 
-Then, we have to supply these environment variables inline before running `pnpm mesh-serve` inside `gateway/`, or add a `.env` file there and Mesh will pick it up, and switch to pulling the supergraph source from the hosted source (Hive).
+Then, we have to supply these environment variables inline before running `npm run mesh-serve` inside `gateway/`, or add a `.env` file there and Mesh will pick it up, and switch to pulling the supergraph source from the hosted source (Hive).
 
 ```sh
 # gateway/.env
@@ -301,7 +276,7 @@ or
 HIVE_REGISTRY_TOKEN=YOUR_VALUE \
 HIVE_CDN_ENDPOINT=YOUR_VALUE \
 HIVE_CDN_KEY=YOUR_VALUE \
-pnpm mesh-serve
+npm run mesh-serve
 ```
 
 Then, restart the gateway, and navigate to `http://localhost:4000/graphql`, you'll see the supergraph served from the published subgraphs through Hive, and GraphQL Mesh will handle polling based on your configuration so when there are new Supergraph versions composed in Hive, Mesh will pick it up automatically! 🎉
