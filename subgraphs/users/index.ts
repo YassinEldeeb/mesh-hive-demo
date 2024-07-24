@@ -5,6 +5,10 @@ import { parse, print } from "graphql";
 import { createYoga, Plugin } from "graphql-yoga";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { useHMACSignatureValidation } from "@graphql-mesh/hmac-upstream-signature";
+import {
+  useExtractedJWT,
+  JWTExtendContextFields,
+} from "@graphql-mesh/plugin-jwt-auth";
 import { useOperationFieldPermissions } from "@envelop/operation-field-permissions";
 
 const users = [
@@ -23,53 +27,23 @@ if (!HMAC_SIGNING_SECRET) {
   throw new Error("HMAC_SIGNING_SECRET environment variable is required");
 }
 
-const useMyPlugin = (): Plugin<{ currentUserId: string }> => {
-  const mapping = new WeakMap<Request, Record<string, any>>();
-
-  return {
-    onParams({ params, request }) {
-      console.log("onParams, request extensions:", params.extensions);
-
-      if (params.extensions) {
-        mapping.set(request, params.extensions);
-      }
-    },
-    onContextBuilding({ context, extendContext }) {
-      const header = context.request.headers.get("x-hmac-signature");
-      console.log("x-hmac-signature:", header);
-
-      if (mapping.has(context.request)) {
-        const jwtRaw = mapping.get(context.request)!.jwt.payload;
-
-        extendContext({
-          currentUserId: jwtRaw.sub,
-        });
-      }
-    },
-    onExecute: ({ args }: any) => {
-      console.log("onExecute", print(args.document));
-    },
-  };
-};
-
 createServer(
   createYoga({
     logging: true,
     plugins: [
-      useHMACSignatureValidation({
-        secret: HMAC_SIGNING_SECRET,
-      }),
-      useMyPlugin(),
-      useOperationFieldPermissions<{ currentUserId: string }>({
-        // we can access graphql context here
+      // useHMACSignatureValidation({
+      //   secret: HMAC_SIGNING_SECRET,
+      // }),
+      useExtractedJWT({}),
+      useOperationFieldPermissions<{ jwt: JWTExtendContextFields }>({
         getPermissions: async (context) => {
-          console.log("getPermissions, currentUserId:", context.currentUserId);
+          const userId = context.jwt.payload.sub;
 
-          const permissions =
-            permissionsPerUserId[context.currentUserId] || new Set();
-          console.log("user permissions:", permissions);
+          if (!userId) {
+            return new Set();
+          }
 
-          return permissions;
+          return permissionsPerUserId[userId] || new Set();
         },
       }),
     ],
