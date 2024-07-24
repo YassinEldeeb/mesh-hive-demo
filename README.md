@@ -42,16 +42,16 @@ Take a moment to look at the subgraph definitions in the `subgraphs/` directory.
 
 ### 3. Run GraphQL Mesh (the gateway)
 
-Now, head to the `/gateway` directory, you'll see a previously composed `supergraph.graphql` file which we'll use to run the gateway.
+Now, head to the [`/gateway`](https://github.com/YassinEldeeb/mesh-hive-demo/tree/main/gateway) directory, you'll see a previously composed `supergraph.graphql` file which we'll use to run the gateway.
 
 GraphQL Mesh, as a gateway, accepts requests and resolves them by talking to subgraphs, so we need to run the subgraphs first:
 
-Go to `/subgraphs`, and run the following to start the subgraphs:
+Go to [`/subgraphs`](https://github.com/YassinEldeeb/mesh-hive-demo/tree/main/subgraphs), and run the following to start the subgraphs:
 ```sh
 npm run start:subgraphs
 ```
 
-Then switch over to `/gateway`, and run: 
+Then switch over to [`/gateway`](https://github.com/YassinEldeeb/mesh-hive-demo/tree/main/gateway), and run: 
 ```sh
 npm run start
 ```
