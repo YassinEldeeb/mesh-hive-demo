@@ -2,6 +2,9 @@ name: "mesh-hive-demo"
 services:
   gateway:
     image: ghcr.io/ardatan/mesh-serve:09f7e4d
+    depends_on:
+      - users_subgraph
+      - comments_subgraph
     ports:
       - "4000:4000"
     env_file:

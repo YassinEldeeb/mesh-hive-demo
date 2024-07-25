@@ -17,7 +17,7 @@ if (!HMAC_SIGNING_SECRET) {
 
 export const serveConfig = defineConfig({
   logging: true,
-  plugins: (pluginCtx) => [
+  plugins: () => [
     usePrometheusMetrics({
       http: true,
       fetchMetrics: true,
