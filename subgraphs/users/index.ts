@@ -1,12 +1,12 @@
 import { readFileSync } from "fs";
 import { createServer } from "http";
 import { join } from "path";
-import { parse, print } from "graphql";
-import { createYoga, Plugin } from "graphql-yoga";
+import { parse } from "graphql";
+import { createYoga } from "graphql-yoga";
 import { buildSubgraphSchema } from "@apollo/subgraph";
-import { useHMACSignatureValidation } from "@graphql-mesh/hmac-upstream-signature";
+import { useHmacSignatureValidation } from "@graphql-mesh/hmac-upstream-signature";
 import {
-  useExtractedJWT,
+  useForwardedJWT,
   JWTExtendContextFields,
 } from "@graphql-mesh/plugin-jwt-auth";
 import { useOperationFieldPermissions } from "@envelop/operation-field-permissions";
@@ -31,10 +31,10 @@ createServer(
   createYoga({
     logging: true,
     plugins: [
-      // useHMACSignatureValidation({
-      //   secret: HMAC_SIGNING_SECRET,
-      // }),
-      useExtractedJWT({}),
+      useHmacSignatureValidation({
+        secret: HMAC_SIGNING_SECRET,
+      }),
+      useForwardedJWT({}),
       useOperationFieldPermissions<{ jwt: JWTExtendContextFields }>({
         getPermissions: async (context) => {
           const userId = context.jwt.payload.sub;

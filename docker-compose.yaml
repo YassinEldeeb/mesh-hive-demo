@@ -1,7 +1,7 @@
 name: "mesh-hive-demo"
 services:
   gateway:
-    image: ghcr.io/ardatan/mesh-serve:0e175b4
+    image: ghcr.io/ardatan/mesh-serve:09f7e4d
     ports:
       - "4000:4000"
     env_file:

@@ -5,11 +5,10 @@
     "start": "mesh-serve"
   },
   "dependencies": {
-    "@graphql-mesh/serve-cli": "0.8.0-alpha-20240718091950-b611de5a5acd4f537928faa52f613ee926709c8b",
-    "@graphql-mesh/plugin-prometheus": "0.102.0",
-    "@graphql-mesh/plugin-jwt-auth": "0.0.2-alpha-20240724084430-9cf518fe7812a57c43cdaa1d0db557d73b9a9185",
-    "@graphql-mesh/hmac-upstream-signature": "0.0.2-alpha-20240724125037-eec6f7a05bb42a0319e34da6c47844086fc3271c",
-    "@envelop/opentelemetry": "6.3.1",
+    "@graphql-mesh/serve-cli": "0.8.3",
+    "@graphql-mesh/plugin-prometheus": "0.102.4",
+    "@graphql-mesh/plugin-jwt-auth": "0.0.3",
+    "@graphql-mesh/hmac-upstream-signature": "0.0.2",
     "dotenv": "^16.4.5",
     "graphql": "16.9.0"
   }

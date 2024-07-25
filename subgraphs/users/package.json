@@ -10,8 +10,8 @@
     "@graphql-hive/cli": "0.38.5",
     "graphql": "16.9.0",
     "graphql-yoga": "5.6.0",
-    "@graphql-mesh/plugin-jwt-auth": "0.0.2-alpha-20240724084430-9cf518fe7812a57c43cdaa1d0db557d73b9a9185",
-    "@graphql-mesh/hmac-upstream-signature": "0.0.2-alpha-20240724125037-eec6f7a05bb42a0319e34da6c47844086fc3271c"
+    "@graphql-mesh/plugin-jwt-auth": "0.0.3",
+    "@graphql-mesh/hmac-upstream-signature": "0.0.2"
   },
   "devDependencies": {
     "tsx": "^4.16.2",
