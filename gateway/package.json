@@ -5,7 +5,11 @@
     "start": "mesh-serve"
   },
   "dependencies": {
-    "@graphql-mesh/serve-cli": "0.7.0",
+    "@graphql-mesh/serve-cli": "0.8.3",
+    "@graphql-mesh/plugin-prometheus": "0.102.4",
+    "@graphql-mesh/plugin-jwt-auth": "0.0.3",
+    "@graphql-mesh/hmac-upstream-signature": "0.0.2",
+    "dotenv": "^16.4.5",
     "graphql": "16.9.0"
   }
 }
