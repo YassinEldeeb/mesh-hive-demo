@@ -29,6 +29,17 @@ export const serveConfig = defineConfig({
         }),
       ],
       serviceName: "gateway",
+      spans: {
+        http: ({ request }) => {
+          const url = new URL(request.url);
+
+          if (url.pathname === "/metrics" || url.pathname === "/") {
+            return false;
+          }
+
+          return true;
+        },
+      },
     }),
     usePrometheusMetrics({
       http: true,
