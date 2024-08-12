@@ -4,6 +4,10 @@ import useJWT, {
 } from "@graphql-mesh/plugin-jwt-auth";
 import { useHmacUpstreamSignature } from "@graphql-mesh/hmac-upstream-signature";
 import usePrometheusMetrics from "@graphql-mesh/plugin-prometheus";
+import {
+  useOpenTelemetry,
+  createOtlpHttpExporter,
+} from "@graphql-mesh/plugin-opentelemetry";
 
 const { JWT_SIGNING_SECRET, HMAC_SIGNING_SECRET } = process.env;
 
@@ -18,6 +22,14 @@ if (!HMAC_SIGNING_SECRET) {
 export const serveConfig = defineConfig({
   logging: true,
   plugins: () => [
+    useOpenTelemetry({
+      exporters: [
+        createOtlpHttpExporter({
+          url: "http://jaeger:4318/v1/traces",
+        }),
+      ],
+      serviceName: "gateway",
+    }),
     usePrometheusMetrics({
       http: true,
       fetchMetrics: true,

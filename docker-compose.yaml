@@ -1,7 +1,7 @@
 name: "mesh-hive-demo"
 services:
   gateway:
-    image: ghcr.io/ardatan/mesh-serve:09f7e4d
+    image: ghcr.io/ardatan/mesh-serve:0.9.0@sha256:b74ab53b9d09df5ccd83e00bcb0d22c67b18e499ab997c8563d43d32eaf24f13
     depends_on:
       - users_subgraph
       - comments_subgraph
@@ -72,13 +72,14 @@ services:
 
   # Jaeger (Telmetry)
   jaeger:
-    image: jaegertracing/all-in-one:1.59.0
+    image: jaegertracing/all-in-one:1.60.0
     environment:
       COLLECTOR_OTLP_ENABLED: true
     ports:
-      - 4317:4317 # OTLP over gRPC
       - 4318:4318 # OTLP over HTTP
       - 16686:16686 # Jaeger UI / API
+    networks:
+      - graphql
 
   grafana:
     image: grafana/grafana:10.3.3
