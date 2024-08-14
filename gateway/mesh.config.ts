@@ -20,7 +20,6 @@ if (!HMAC_SIGNING_SECRET) {
 }
 
 export const serveConfig = defineConfig({
-  host: "0.0.0.0",
   logging: true,
   plugins: () => [
     useOpenTelemetry({

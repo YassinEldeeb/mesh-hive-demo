@@ -18,7 +18,7 @@ services:
       retries: 5
       start_period: 20s
       timeout: 10s
-    command: ["--supergraph", "./supergraph.graphql"]
+    command: ["--supergraph", "./supergraph.graphql", "--host", "0.0.0.0"]
     networks:
       - graphql
 
