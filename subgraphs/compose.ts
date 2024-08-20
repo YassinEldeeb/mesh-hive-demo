@@ -28,7 +28,10 @@ const result = composeServices([
 ]);
 
 if (compositionHasErrors(result)) {
-  console.error(result.errors);
+  for (const error of result.errors) {
+    console.error(error.message);
+  }
+  process.exit(1);
 } else {
   const resultDocker = composeServices([
     {
