@@ -12,7 +12,8 @@
   "dependencies": {
     "@graphql-mesh/serve-cli": "0.9.0",
     "@graphql-mesh/plugin-prometheus": "0.103.0",
-    "@graphql-mesh/plugin-jwt-auth": "0.0.3",
+    "@graphql-mesh/plugin-jwt-auth": "0.2.3-alpha-20240819152450-f42c7c3cfec6f452eed0b589e3d37b996c3219e7",
+    "@envelop/generic-auth": "8.0.0-alpha-20240812203512-43551114",
     "@graphql-mesh/hmac-upstream-signature": "0.1.0",
     "@graphql-mesh/plugin-opentelemetry": "0.1.0",
     "dotenv": "^16.4.5",

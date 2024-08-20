@@ -19,7 +19,7 @@ if (!HMAC_SIGNING_SECRET) {
 }
 
 const verifyHmacPlugin = {
-  async requestDidStart({ request, contextValue }) {
+  async requestDidStart({ request }) {
     const signature = request.extensions?.["hmac-signature"];
 
     if (!signature) {
