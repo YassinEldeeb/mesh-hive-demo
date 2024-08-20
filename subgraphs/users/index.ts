@@ -6,20 +6,14 @@ import { createYoga } from "graphql-yoga";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { useHmacSignatureValidation } from "@graphql-mesh/hmac-upstream-signature";
 import {
-  useForwardedJWT,
   JWTExtendContextFields,
+  useForwardedJWT,
 } from "@graphql-mesh/plugin-jwt-auth";
-import { useOperationFieldPermissions } from "@envelop/operation-field-permissions";
 
 const users = [
   { id: "1", name: "Alice" },
   { id: "2", name: "Bob" },
 ];
-
-const permissionsPerUserId: Record<string, Set<string>> = {
-  "1": new Set(["Query.*", "User.id", "User.__typename"]),
-  "2": new Set(["Query.*", "User.id", "User.__typename", "User.name"]),
-};
 
 const { HMAC_SIGNING_SECRET } = process.env;
 
@@ -35,17 +29,6 @@ createServer(
         secret: HMAC_SIGNING_SECRET,
       }),
       useForwardedJWT({}),
-      useOperationFieldPermissions<{ jwt: JWTExtendContextFields }>({
-        getPermissions: async (context) => {
-          const userId = context.jwt.payload.sub;
-
-          if (!userId) {
-            return new Set();
-          }
-
-          return permissionsPerUserId[userId] || new Set();
-        },
-      }),
     ],
     schema: buildSubgraphSchema({
       typeDefs: parse(
@@ -53,6 +36,10 @@ createServer(
       ),
       resolvers: {
         Query: {
+          me: (_, __, context: any) => {
+            const jwtPayload: JWTExtendContextFields = context.jwt;
+            return users.find((user) => user.id === jwtPayload?.payload?.sub);
+          },
           users: () => users,
           user: (_, { id }) => users.find((user) => user.id === id),
         },

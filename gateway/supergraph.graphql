@@ -5,8 +5,8 @@ schema
   
   
   
-  
-  
+  @link(url: "https://specs.apollo.dev/requiresScopes/v0.1", for: SECURITY)
+  @link(url: "https://specs.apollo.dev/authenticated/v0.1", for: SECURITY)
   
 {
   query: Query
@@ -72,6 +72,14 @@ schema
 
 
 
+  directive @requiresScopes(
+    scopes: [[requiresScopes__Scope!]!]!
+  ) on FIELD_DEFINITION | OBJECT | INTERFACE | SCALAR | ENUM
+
+  scalar requiresScopes__Scope
+
+
+  directive @authenticated on FIELD_DEFINITION | OBJECT | INTERFACE | SCALAR | ENUM
 
 
 enum join__Graph {
@@ -87,12 +95,13 @@ type Comment @join__type(graph: COMMENTS, key: "id")  {
 
 type User @join__type(graph: COMMENTS, key: "id")  @join__type(graph: USERS, key: "id")  {
   id: ID!
-  comments: [Comment!]! @join__field(graph: COMMENTS) 
-  name: String! @join__field(graph: USERS) 
+  comments: [Comment!]! @join__field(graph: COMMENTS)  @requiresScopes(scopes: [["ReadComments"]]) 
+  name: String! @join__field(graph: USERS)  @requiresScopes(scopes: [["ReadUsersName"]]) 
 }
 
 type Query @join__type(graph: COMMENTS)  @join__type(graph: USERS)  {
   comments: [Comment] @join__field(graph: COMMENTS) 
+  me: User @join__field(graph: USERS)  @authenticated
   users: [User] @join__field(graph: USERS) 
   user(id: ID!) : User @join__field(graph: USERS) 
 }
