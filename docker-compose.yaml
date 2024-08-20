@@ -1,7 +1,7 @@
 name: "mesh-hive-demo"
 services:
   gateway:
-    image: ghcr.io/ardatan/mesh-serve:0.9.0@sha256:b74ab53b9d09df5ccd83e00bcb0d22c67b18e499ab997c8563d43d32eaf24f13
+    image: ghcr.io/ardatan/mesh-serve:0.10.4-alpha-20240820101347-da6c7becaf1f398eaf424491436a3656054df517
     depends_on:
       - users_subgraph
       - comments_subgraph
@@ -18,7 +18,7 @@ services:
       retries: 5
       start_period: 20s
       timeout: 10s
-    command: ["--supergraph", "./supergraph.graphql", "--host", "0.0.0.0"]
+    command: ["supergraph", "./supergraph.graphql", "--host", "0.0.0.0"]
     networks:
       - graphql
 
