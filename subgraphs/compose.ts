@@ -37,7 +37,7 @@ if (compositionHasErrors(result)) {
     {
       name: "users",
       typeDefs: usersTypeDefs,
-      url: "http://users_subgraph:4001/graphql",
+      url: "https://users_subgraph:4001/graphql",
     },
     {
       name: "comments",

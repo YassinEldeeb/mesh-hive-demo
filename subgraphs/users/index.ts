@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { createServer } from "http";
 import { join } from "path";
 import { parse } from "graphql";
 import { createYoga } from "graphql-yoga";
@@ -9,6 +8,7 @@ import {
   JWTExtendContextFields,
   useForwardedJWT,
 } from "@graphql-mesh/plugin-jwt-auth";
+import { createServer } from "https";
 
 const users = [
   { id: "1", name: "Alice" },
@@ -21,8 +21,7 @@ if (!HMAC_SIGNING_SECRET) {
   throw new Error("HMAC_SIGNING_SECRET environment variable is required");
 }
 
-createServer(
-  createYoga({
+const yoga = createYoga({
     logging: true,
     plugins: [
       useHmacSignatureValidation({
@@ -50,7 +49,14 @@ createServer(
         },
       },
     }),
-  })
+  });
+
+createServer(
+  {
+    key: readFileSync(join(__dirname, "key.pem")),
+    cert: readFileSync(join(__dirname, "cert.pem")),
+  },
+  yoga
 ).listen(4001, () => {
   console.log("Users subgraph is running on http://localhost:4001");
 });
