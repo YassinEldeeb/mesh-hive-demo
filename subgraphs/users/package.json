@@ -1,5 +1,6 @@
 {
-  "name": "@examples/hive-example-graphql-service",
+  "name": "@examples/hive-example-graphql-user-service",
+  "version": "1.0.0",
   "scripts": {
     "publish": "hive schema:publish --service mygraphql --url http://localhost:4001/graphql typeDefs.graphql",
     "start": "tsx index.ts"

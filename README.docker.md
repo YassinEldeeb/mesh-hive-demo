@@ -1,8 +1,8 @@
 ## Running with Docker
 
-Just run `./start.sh`.
+Just run `npm start`.
 
-Mesh: http://localhost:4000
+Gateway: http://localhost:4000
 Grafana (prom metrics): http://localhost:3000/explore
 Jaeger (opentelemetry): http://localhost:16686/
 
@@ -24,8 +24,8 @@ flowchart LR
 
     3--->7["Remote JWKS"]
 
-    subgraph Mesh Gateway
-    2["Mesh Engine"]
+    subgraph Hive Gateway
+    2["Gateway Engine"]
     3["JWT Plugin"]
     4["Query Planner"]
     2--->|"Bearer XYZ"|3
@@ -50,8 +50,8 @@ flowchart LR
 
     3--->7["Remote JWKS"]
 
-    subgraph Mesh Gateway
-    2["Mesh Engine"]
+    subgraph Hive Gateway
+    2["Gateway Engine"]
     3["JWT Plugin"]
     4["Query Planner"]
     2--->|"Bearer XYZ"|3

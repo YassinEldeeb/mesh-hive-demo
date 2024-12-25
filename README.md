@@ -1,29 +1,29 @@
-# GraphQL Mesh <> Hive Demo
+# Hive Platform Demo
 
-In this demo, you'll learn how to integrate [GraphQL Mesh](https://the-guild.dev/graphql/mesh) with [Hive](https://the-guild.dev/graphql/hive). We'll show you how to set up a local supergraph, publish subgraphs, connect to Hive for supergraph polling, usage reporting, and schema management. You'll also see how to use key plugins in GraphQL Mesh, like response caching, rate limiting and authentication. By following this guide, you'll be able to set up and run your own GraphQL Mesh instance with Hive, making your GraphQL API management easier.
+In this demo, you'll learn how to integrate [Hive Gateway](https://the-guild.dev/graphql/hive/docs/gateway) with [Hive Console](https://the-guild.dev/graphql/hive). We'll show you how to set up a local supergraph, publish subgraphs, connect to Hive for supergraph polling, usage reporting, and schema management. You'll also see how to use key plugins in Hive Gateway, like response caching, rate limiting and authentication. By following this guide, you'll be able to set up and run your own Hive Gateway instance with Hive Console, making your GraphQL API management easier.
 
 ## Table of Contents
 
 1. [The Complete Federation Solution](#the-complete-federation-solution)
 2. [Create a Hive Account and Project](#1-create-a-hive-account-and-project)
 3. [Explore the Subgraphs](#3-explore-the-subgraphs)
-4. [Run GraphQL Mesh (the gateway)](#5-run-graphql-mesh-the-gateway)
-5. [Hive Integration](#6-hive-integration)
+4. [Run Hive Gateway](#5-run-hive-gateway)
+5. [Hive Console Integration](#6-hive-integration)
    - [Hive CLI Access Token](#1-hive-cli-access-token)
    - [Publish your schemas](#2-publish-your-schemas)
    - [Check Your Schema](#3-check-your-schema)
-   - [Fetch the Supergraph from Hive](#4-fetch-the-supergraph-from-hive)
-   - [Set Up GraphQL Mesh with Hive](#5-set-up-graphql-mesh-with-hive)
+   - [Fetch the Supergraph from Hive CDN](#4-fetch-the-supergraph-from-hive)
+   - [Set Up Hive Gateway with Hive Console](#5-set-up-hive-gateway-with-hive-console)
    - [Usage reporting](#6-usage-reporting)
 
 
 ## The Complete Federation Solution
 
-GraphQL Mesh and Hive together offer a complete federation solution that allows you to manage your GraphQL APIs with ease and flexibility. Here’s how each component contributes:
+Hive Gateway and Hive Console together offer a complete federation solution that allows you to manage your GraphQL APIs with ease and flexibility. Here’s how each component contributes:
 
-- **GraphQL Mesh**: Acts as a gateway that enables you to integrate and manage distributed GraphQL APIs (subgraphs). It provides powerful plugins for enhanced API capabilities, such as response caching, rate limiting, authentication, tracing, and more.
+- **Hive Gateway**: Acts as a gateway that enables you to integrate and manage distributed GraphQL APIs (subgraphs). It provides powerful plugins for enhanced API capabilities, such as response caching, rate limiting, authentication, tracing, and more.
 
-- **Hive**: A schema registry and management tool that allows you to version, monitor, and manage your GraphQL schemas. Hive handles the schema composition and versioning on the cloud, ensuring that your APIs are always up-to-date and consistent. It also provides features like usage reporting and analytics, which help you understand how your APIs are being used and optimize their performance.
+- **Hive Console**: A schema registry and management tool that allows you to version, monitor, and manage your GraphQL schemas. Hive handles the schema composition and versioning on the cloud, ensuring that your APIs are always up-to-date and consistent. It also provides features like usage reporting and analytics, which help you understand how your APIs are being used and optimize their performance.
 
 For users transitioning from Apollo Federation, this combination provides a truly open-source robust alternative with additional features and flexibility.
 
@@ -59,11 +59,11 @@ npm run start
 You should see this in your terminal:
 
 ```sh
-🕸️  Mesh 💡 Searching for default config files
-🕸️  Mesh 💡 Loaded config file
-🕸️  Mesh 💡 Loading Supergraph from ./supergraph.graphql
-🕸️  Mesh ⚠️ If you want to enable hot reloading when ./supergraph.graphql changes, install "@parcel/watcher"
-🕸️  Mesh 💡 Starting server on http://0.0.0.0:4000
+Hive Gateway 💡 Searching for default config files
+Hive Gateway 💡 Loaded config file
+Hive Gateway 💡 Loading Supergraph from ./supergraph.graphql
+Hive Gateway ⚠️ If you want to enable hot reloading when ./supergraph.graphql changes, install "@parcel/watcher"
+Hive Gateway 💡 Starting server on http://0.0.0.0:4000
 ```
 
 Now, if you go to `http://0.0.0.0:4000`, you'll see your gateway running, try to execute any query, and it will succeed! 🎉
@@ -240,12 +240,12 @@ curl -L -H "X-Hive-CDN-Key: YOUR_HIVE_CDN_TOKEN" CDN_ENDPOINT_HERE
 This command will return the Supergraph SDL as an output.
 
 
-#### 5. Set Up GraphQL Mesh with Hive
+#### 5. Set Up Hive Gateway with Hive Console
 
-Go to `gateway/mesh.config.ts`, you'll notice it's currently configured to read the supergraph from a local file:
+Go to `gateway/gateway.config.ts`, you'll notice it's currently configured to read the supergraph from a local file:
 
 ```ts
-import { defineConfig } from '@graphql-mesh/serve-cli'
+import { defineConfig } from '@graphql-hive/gateway'
 
 export const serveConfig = defineConfig({
     supergraph: "./supergraph.graphql"
@@ -255,14 +255,14 @@ export const serveConfig = defineConfig({
 We'll change it like this to remove this local supergraph configuration, and supply a `polling` option:
 
 ```ts
-import { defineConfig } from '@graphql-mesh/serve-cli'
+import { defineConfig } from '@graphql-hive/gateway'
 
 export const serveConfig = defineConfig({
     polling: 10000
 })
 ```
 
-Then, we have to supply these environment variables inline before running `npm run mesh-serve` inside `gateway/`, or add a `.env` file there and Mesh will pick it up, and switch to pulling the supergraph source from the hosted source (Hive).
+Then, we have to supply these environment variables inline before running `npm start` inside `gateway/`, or add a `.env` file there and Gateway will pick it up, and switch to pulling the supergraph source from the hosted source (Hive).
 
 ```sh
 # gateway/.env
@@ -278,15 +278,15 @@ or
 HIVE_REGISTRY_TOKEN=YOUR_VALUE \
 HIVE_CDN_ENDPOINT=YOUR_VALUE \
 HIVE_CDN_KEY=YOUR_VALUE \
-npm run mesh-serve
+npm run start
 ```
 
-Then, restart the gateway, and navigate to `http://localhost:4000/graphql`, you'll see the supergraph served from the published subgraphs through Hive, and GraphQL Mesh will handle polling based on your configuration so when there are new Supergraph versions composed in Hive, Mesh will pick it up automatically! 🎉
+Then, restart the gateway, and navigate to `http://localhost:4000/graphql`, you'll see the supergraph served from the published subgraphs through Hive Console, and Hive Gateway will handle polling based on your configuration so when there are new Supergraph versions composed in Hive, Gateway will pick it up automatically! 🎉
 
 
 #### 6. Usage reporting
 
-Mesh will also collect and report the operations sent through it to Hive, head to `http://localhost:4000/graphql` and send some requests. Wait for a few seconds, then go to the Hive dashboard and navigate to the **"Insights"** tab. You'll see various metrics and charts related to the operations executed against your GraphQL Mesh gateway!
+Gateway will also collect and report the operations sent through it to Hive, head to `http://localhost:4000/graphql` and send some requests. Wait for a few seconds, then go to the Hive dashboard and navigate to the **"Insights"** tab. You'll see various metrics and charts related to the operations executed against your Hive Gateway gateway!
 
 ![](./images/insights.png)
 

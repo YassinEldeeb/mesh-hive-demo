@@ -6,15 +6,22 @@
   "main": "index.js",
   "scripts": {
     "compose": "tsx compose.ts",
-    "start:subgraphs": "concurrently \"pnpm start:users\" \"pnpm start:comments\"",
-    "start:users": "cd users && pnpm start",
-    "start:comments": "cd comments && pnpm start"
+    "start:subgraphs": "concurrently \"yarn start:users\" \"yarn start:comments\"",
+    "start:users": "cd users && yarn start",
+    "start:comments": "cd comments && yarn start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@theguild/federation-composition": "^0.12.1"
+  },
+  "workspaces": [
+    "users",
+    "comments"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

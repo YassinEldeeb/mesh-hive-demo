@@ -1,7 +1,7 @@
-name: "mesh-hive-demo"
+name: "hive-platform-demo"
 services:
   gateway:
-    image: ghcr.io/ardatan/mesh-serve:0.10.4-alpha-20240820101347-da6c7becaf1f398eaf424491436a3656054df517
+    image: ghcr.io/graphql-hive/gateway:1.7.3
     depends_on:
       - users_subgraph
       - comments_subgraph
@@ -10,7 +10,7 @@ services:
     env_file:
       - ./gateway/.env
     volumes:
-      - ./gateway/mesh.config.ts:/serve/mesh.config.ts
+      - ./gateway/gateway.config.ts:/serve/gateway.config.ts
       - ./gateway/supergraph.docker.graphql:/serve/supergraph.graphql
       - ./gateway/users_cert.pem:/serve/users_cert.pem
     healthcheck:
