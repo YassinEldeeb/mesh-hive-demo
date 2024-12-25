@@ -1,5 +1,5 @@
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
+  @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@requiresScopes"])
 
 type Comment @key(fields: "id") {
   id: ID!
@@ -9,7 +9,7 @@ type Comment @key(fields: "id") {
 
 type User @key(fields: "id") {
   id: ID!
-  comments: [Comment!]!
+  comments: [Comment!]! @requiresScopes(scopes: [["ReadComments"]])
 }
 
 type Query {

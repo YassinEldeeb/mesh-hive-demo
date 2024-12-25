@@ -83,8 +83,8 @@ schema
 
 
 enum join__Graph {
-  COMMENTS @join__graph(name: "comments", url: "http://localhost:4002/graphql") 
-  USERS @join__graph(name: "users", url: "http://localhost:4001/graphql") 
+  COMMENTS @join__graph(name: "comments", url: "http://comments_subgraph:4002/graphql") 
+  USERS @join__graph(name: "users", url: "https://users_subgraph:4001/graphql") 
 }
 
 type Comment @join__type(graph: COMMENTS, key: "id")  {

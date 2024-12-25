@@ -1,0 +1,99 @@
+name: "hive-platform-demo"
+services:
+  gateway:
+    image: ghcr.io/graphql-hive/gateway:1.7.3
+    depends_on:
+      - users_subgraph
+      - comments_subgraph
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./gateway/.env
+    volumes:
+      - ./gateway/gateway.config.ts:/serve/gateway.config.ts
+      - ./gateway/supergraph.docker.graphql:/serve/supergraph.graphql
+      - ./gateway/users_cert.pem:/serve/users_cert.pem
+    healthcheck:
+      test: curl --fail http://localhost:4000 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    command: ["supergraph", "./supergraph.graphql", "--host", "0.0.0.0"]
+    networks:
+      - graphql
+
+  comments_subgraph:
+    build:
+      context: ./subgraphs/comments/
+      dockerfile: ../Dockerfile
+    ports:
+      - "4002:4002"
+    environment:
+      HMAC_SIGNING_SECRET: topsecret
+    healthcheck:
+      test: curl --fail http://localhost:4002 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+    networks:
+      - graphql
+
+  users_subgraph:
+    build:
+      context: ./subgraphs/users/
+      dockerfile: ../Dockerfile
+    environment:
+      HMAC_SIGNING_SECRET: topsecret
+    ports:
+      - "4001:4001"
+    healthcheck:
+      test: curl --fail http://localhost:4001 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+    networks:
+      - graphql
+
+  prometheus:
+    image: prom/prometheus:v2.53.1
+    volumes:
+      - "./docker-configs/prom/prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    networks:
+      - graphql
+    command:
+      - "--web.enable-remote-write-receiver"
+      - "--enable-feature=native-histograms"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--log.level=debug"
+
+  # Jaeger (Telmetry)
+  jaeger:
+    image: jaegertracing/all-in-one:1.60.0
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+    ports:
+      - 4318:4318 # OTLP over HTTP
+      - 16686:16686 # Jaeger UI / API
+    networks:
+      - graphql
+
+  grafana:
+    image: grafana/grafana:10.3.3
+    networks:
+      - graphql
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - ./docker-configs/grafana:/etc/grafana/provisioning/
+
+networks:
+  graphql: {}
