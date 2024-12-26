@@ -9,7 +9,7 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@graphql-hive/gateway": "1.7.3",
-    "graphql": "16.9.0"
+    "@graphql-hive/gateway": "^1.7.3",
+    "graphql": "^16.9.0"
   }
 }

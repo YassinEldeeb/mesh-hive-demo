@@ -11,7 +11,7 @@
     "graphql": "16.9.0",
     "graphql-yoga": "5.10.8",
     "@graphql-mesh/plugin-jwt-auth": "1.4.0",
-    "@graphql-mesh/hmac-upstream-signature": "1.2.19-alpha-73dbe3a2dabb6b84105c4dac3586696daa3d4fcb"
+    "@graphql-mesh/hmac-upstream-signature": "1.2.19"
   },
   "devDependencies": {
     "tsx": "^4.16.2",
