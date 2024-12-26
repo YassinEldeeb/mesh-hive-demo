@@ -8,7 +8,11 @@
     "gateway"
   ],
   "scripts": {
+    "generate-users-subgraph-cert": "openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout ./subgraphs/users/key.pem -out ./subgraphs/users/cert.pem -subj \"/CN=users_subgraph\" -addext \"subjectAltName=DNS:users_subgraph,DNS:localhost\" && cp ./subgraphs/users/cert.pem ./gateway/users_cert.pem",
     "start": "set -e && docker compose up -d --build --force-recreate --remove-orphans"
+  },
+  "resolutions": {
+    "graphql": "16.9.0"
   },
   "engines": {
     "node": ">=22.0.0"
