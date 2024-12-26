@@ -1,7 +1,7 @@
 name: "hive-platform-demo"
 services:
   gateway:
-    image: ghcr.io/graphql-hive/gateway:1.7.3
+    image: ghcr.io/graphql-hive/gateway:1.7.4
     depends_on:
       - users_subgraph
       - comments_subgraph
